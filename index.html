@@ -9,7 +9,17 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Cipris.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Cipris" startnode="26" creator="Twine" creator-version="2.3.16" ifid="E763630F-A200-48CD-9367-A8135F8EB985" zoom="1" format="Harlowe" format-version="3.2.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="1cipris" tags="startup" position="32,0" size="100,100">{
+<tw-storydata name="Cipris" startnode="26" creator="Twine" creator-version="2.3.16" ifid="E763630F-A200-48CD-9367-A8135F8EB985" zoom="1" format="Harlowe" format-version="3.2.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar tw-icon.redo {
+
+display: none;
+
+}
+tw-sidebar tw-icon.undo {
+
+display: none;
+ 
+
+}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="1cipris" tags="startup" position="32,0" size="100,100">{
 &lt;!-- Set autosave variables --&gt;
 (set: $_version to &quot;1.0.2&quot;)
 (set: $_autosave_slot to &quot;autosave&quot;)
@@ -40,7 +50,9 @@ It will not be considered.
 
 (if:$application is 1)[
 (after: 5s) (goto: &#39;End 1&#39;)
-]</tw-passagedata><tw-passagedata pid="5" name="cipris" tags="" position="34,107" size="100,100">Hello Prospective Student!
+]</tw-passagedata><tw-passagedata pid="5" name="cipris" tags="" position="34,107" size="100,100">(animate: ?stext, &quot;flicker&quot;, 0.7s)
+|stext&gt;[
+Hello Prospective Student!
 (set: $visits to $visits +1)
 (if: $visits &gt;= 5)[(text-colour:(hsl:0,0,0.5333,0.45))[Have you applied before?]]
 If you are receiving this, you submitted special form I-20P or IAP-66P. Because of the nature of your application, CIPRIS is proud to invite you to our (text-colour:lime)[Online AI Screening Program] in order to better assess if you are a good fit for CIPRIS.
@@ -56,7 +68,8 @@ Before beginnging, we ask that you review our [[Standard Agreement.pdf]] and sig
 If you instead wish to opt out and withdraw your application, you may [[click here]].
 
 (text-colour:black)+(bg:(gradient: 0, 0,#ffffff,0.9978,(hsl:90,0.8039,0.5,0.45),1,#ffffff,1,#19e5e6))
-[CIPRIS]</tw-passagedata><tw-passagedata pid="6" name="My name..." tags="" position="0,351" size="100,100">(input-box:2bind $playerName,&quot;X=&quot;,1,&quot;Enter here&quot;)
+[CIPRIS]
+]</tw-passagedata><tw-passagedata pid="6" name="My name..." tags="" position="0,351" size="100,100">(input-box:2bind $playerName,&quot;X=&quot;,1,&quot;Enter here&quot;)
 [[Submit]]</tw-passagedata><tw-passagedata pid="7" name="Submit" tags="" position="2,485" size="100,100">(dialog: bind $playerSex,&quot;And your sex?&quot;, &quot;Male&quot;,&quot;Female&quot;,&quot;Person&quot;)
 
 (dialog: bind $playerRace,&quot;Thank you, $playerName. What is your ethnicity?&quot;, &quot;White&quot;,&quot;African American&quot;,&quot;Hispanic or Latnix&quot;,&quot;Other&quot;)
