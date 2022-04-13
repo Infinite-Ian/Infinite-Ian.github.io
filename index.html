@@ -9,17 +9,13 @@
 </head>
 <body>
 <tw-story><noscript><tw-noscript>JavaScript needs to be enabled to play Cipris.</tw-noscript></noscript></tw-story>
-<tw-storydata name="Cipris" startnode="1" creator="Twine" creator-version="2.3.16" ifid="E763630F-A200-48CD-9367-A8135F8EB985" zoom="1" format="Harlowe" format-version="3.2.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css">tw-sidebar tw-icon.redo {
-	display: none;
+<tw-storydata name="Cipris" startnode="26" creator="Twine" creator-version="2.3.16" ifid="E763630F-A200-48CD-9367-A8135F8EB985" zoom="1" format="Harlowe" format-version="3.2.3" options="" hidden><style role="stylesheet" id="twine-user-stylesheet" type="text/twine-css"></style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="1cipris" tags="startup" position="32,0" size="100,100">{
+&lt;!-- Set autosave variables --&gt;
+(set: $_version to &quot;1.0.2&quot;)
+(set: $_autosave_slot to &quot;autosave&quot;)
+(set: $_autosave_filename to &quot;save v&quot;+$_version)
 }
-tw-sidebar tw-icon.undo {
-	display: none;
-}
-
-tw-sidebar{
-	visibility: hidden
-}</style><script role="script" id="twine-user-script" type="text/twine-javascript"></script><tw-passagedata pid="1" name="1cipris" tags="" position="37,2" size="100,100">(t8n-depart:&quot;flicker&quot;)+(t8n-arrive:&quot;flicker&quot;)+(t8n-time:1.8s)[[cipris-&gt;cipris]]
-</tw-passagedata><tw-passagedata pid="2" name="here" tags="" position="0,244" size="100,100">(text-colour:lime)[Acceptance Recognized.]
+(set: $ciprisUsername to false)</tw-passagedata><tw-passagedata pid="2" name="here" tags="" position="0,244" size="100,100">(text-colour:lime)[Acceptance Recognized.]
 
 Initializing CXL...
 
@@ -45,9 +41,11 @@ It will not be considered.
 (if:$application is 1)[
 (after: 5s) (goto: &#39;End 1&#39;)
 ]</tw-passagedata><tw-passagedata pid="5" name="cipris" tags="" position="34,107" size="100,100">Hello Prospective Student!
-(if:visits &gt;= 5)[(text-colour:(hsl:0,0,0.5333,0.45))[Have you applied before?]]
-
+(set: $visits to $visits +1)
+(if: $visits &gt;= 5)[(text-colour:(hsl:0,0,0.5333,0.45))[Have you applied before?]]
 If you are receiving this, you submitted special form I-20P or IAP-66P. Because of the nature of your application, CIPRIS is proud to invite you to our (text-colour:lime)[Online AI Screening Program] in order to better assess if you are a good fit for CIPRIS.
+
+As you know, CIPRIS is a school for the academically inclined to work with little to no supervision while customizing their education. Several of our students have gone to work for various world-governments, became world-renowed researchers, and invented endless products that have enhanced our daily lives. With CIPRIS having such a high status, we again must ask that you complete our (text-colour:lime)[Online AI Screening Program].
 
 The screening will not be difficult, but is required for admission.
 
@@ -62,9 +60,12 @@ If you instead wish to opt out and withdraw your application, you may [[click he
 [[Submit]]</tw-passagedata><tw-passagedata pid="7" name="Submit" tags="" position="2,485" size="100,100">(dialog: bind $playerSex,&quot;And your sex?&quot;, &quot;Male&quot;,&quot;Female&quot;,&quot;Person&quot;)
 
 (dialog: bind $playerRace,&quot;Thank you, $playerName. What is your ethnicity?&quot;, &quot;White&quot;,&quot;African American&quot;,&quot;Hispanic or Latnix&quot;,&quot;Other&quot;)
-(goto: &#39;Question 2&#39;)</tw-passagedata><tw-passagedata pid="8" name="End 1" tags="" position="142,2" size="100,100">(goto: &#39;1cipris&#39;)</tw-passagedata><tw-passagedata pid="9" name="your application" tags="" position="145,103" size="100,100">(text-colour:red)[&#39;&#39;FILE NOT FOUND&#39;&#39;]
+(goto: &#39;Question 2&#39;)</tw-passagedata><tw-passagedata pid="8" name="End 1" tags="" position="141,5" size="100,100">(goto: &#39;cipris&#39;)</tw-passagedata><tw-passagedata pid="9" name="your application" tags="" position="145,122" size="100,100">(text-colour:red)[&#39;&#39;FILE NOT FOUND&#39;&#39;]
 (set: $application to 1)
-(after: 1.8s)[(goto: &#39;cipris&#39;)]</tw-passagedata><tw-passagedata pid="10" name="Question 2" tags="" position="397,0" size="100,100">(dialog: bind $raceFeelings,&quot;And how would you say being $playerRace has impacted you, $playerName?&quot;, &quot;Positively&quot;,&quot;Not at all&quot;,&quot;Negatively&quot;)
+(transition:&quot;flicker&quot;)[
+(after: 1s)[(goto: &#39;cipris&#39;)]
+]
+</tw-passagedata><tw-passagedata pid="10" name="Question 2" tags="" position="397,0" size="100,100">(dialog: bind $raceFeelings,&quot;And how would you say being $playerRace has impacted you, $playerName?&quot;, &quot;Positively&quot;,&quot;Not at all&quot;,&quot;Negatively&quot;)
 
 (if:$raceFeelings is &quot;Positively&quot;)[(dialog: bind $playerReligion,&quot;I&#39;m glad. And what is your religion?&quot;, &quot;Monotheistic&quot;,&quot;Polytheistic&quot;,&quot;Other/Specify&quot;)]
 
@@ -75,7 +76,9 @@ If you instead wish to opt out and withdraw your application, you may [[click he
 (goto: &#39;Submit Religion&#39;)
 
 
-</tw-passagedata><tw-passagedata pid="11" name="Submit Religion" tags="" position="398,101" size="100,100">(if:$playerReligion is &quot;Other/Specify&quot;)[(input-box:2bind $playerReligion,&quot;=XX=&quot;,&quot;Enter religion here...&quot;)
+</tw-passagedata><tw-passagedata pid="11" name="Submit Religion" tags="" position="398,101" size="100,100">(if:$playerReligion is &quot;Other/Specify&quot;)[
+(set: $playerOther to 2)
+(input-box:2bind $playerReligion,&quot;=XX=&quot;,&quot;Enter religion here...&quot;)
 [[Submit Religion]]
 ]
 
@@ -94,8 +97,7 @@ If you instead wish to opt out and withdraw your application, you may [[click he
 (if:$lovedDead is &quot;No&quot;)[
 [[Do you think you could handle it?]]
 ]
-</tw-passagedata><tw-passagedata pid="13" name="I bet that hurts" tags="" position="613,0" size="100,100">(transition:&quot;flicker&quot;)
-(if:$playerReligion is &quot;Monotheistic&quot;)[(text-colour:red)[&#39;&#39;Did you pray to your god? Did he help you? Have you seen him help anyone?&#39;&#39;]
+</tw-passagedata><tw-passagedata pid="13" name="I bet that hurts" tags="" position="613,0" size="100,100">(if:$playerReligion is &quot;Monotheistic&quot;)[(text-colour:red)[&#39;&#39;Did you pray to your god? Did he help you? Have you seen him help anyone?&#39;&#39;]
 Would such a god help at all?
 God will [[save us.]]
 God has [[abandoned us.]]
@@ -107,25 +109,32 @@ The gods will [[save us.]]
 The gods have [[abandoned us.]]
 ]
 
-(if:$playerReligion is not &quot;Monotheistic&quot; or &quot;Polytheistic&quot;)[(text-colour:red)[&#39;&#39;Are you so unsure in the world? Where do you think they went? Did they even go anywhere? If they didn&#39;t, were they even real?&#39;&#39;] 
+(if:$playerOther is 2)[
+[(text-colour:red)[&#39;&#39;Are you so unsure in the world? Where do you think they went? Did they even go anywhere? If they didn&#39;t, were they even real?&#39;&#39;] 
 What do you think you believe?
 
 Something will [[save us.]]
 Something has [[abandoned us.]]
-]</tw-passagedata><tw-passagedata pid="14" name="Do you think you could handle it?" tags="" position="402,204" size="100,100">(dialog: &quot;How many $playerRace people have died? How many people have died at all? And you&#39;ve been fortunate to not witness any? Do you think the lack of experience has made you weak?&quot;, &quot;No, I am not any weaker.&quot;,&quot;Yes, I missed an opportunity for growth.&quot;)</tw-passagedata><tw-passagedata pid="15" name="save us." tags="" position="789,4" size="100,100">(set: $hope to TRUE)
-(goto: &#39;Reboot&#39;)</tw-passagedata><tw-passagedata pid="16" name="abandoned us." tags="" position="791,109" size="100,100">(set: $hope to FALSE)
-(goto: &#39;Reboot&#39;)</tw-passagedata><tw-passagedata pid="17" name="Reboot" tags="" position="894,3.5" size="100,100">(text-colour:navy)[cipris]
+]
+]</tw-passagedata><tw-passagedata pid="14" name="Do you think you could handle it?" tags="" position="716,0" size="100,100">(dialog: &quot;How many $playerRace people have died? How many people have died at all? And you&#39;ve been fortunate to not witness any? Do you think the lack of experience has made you weak?&quot;, &quot;No, I am not any weaker.&quot;,&quot;Yes, I missed an opportunity for growth.&quot;)
+
+(after: 7s)[I don&#39;t think it matters.]
+(after: 12s)[How will you know until it happens?]
+(after: 20s)[(text-style:&quot;shudder&quot;)[Aren&#39;t you curious?]]
+(after: 20.5s)[(goto: &#39;Reboot&#39;)]</tw-passagedata><tw-passagedata pid="15" name="save us." tags="" position="504,104" size="100,100">(set: $hope to TRUE)
+(goto: &#39;Reboot&#39;)</tw-passagedata><tw-passagedata pid="16" name="abandoned us." tags="" position="612,103" size="100,100">(set: $hope to false)
+(goto: &#39;Reboot&#39;)</tw-passagedata><tw-passagedata pid="17" name="Reboot" tags="" position="400,252.5" size="100,100">(text-colour:navy)[cipris]
 
 (text-colour:red)[(text-style:&quot;bold&quot;,&quot;shudder&quot;)[&#39;&#39;ERROR&#39;&#39;]]
 
 (after: 2s)[
-(text-colour:lime)[Rebooting...
-CXL...]
+(text-colour:lime)[Rebooting CXL...]
 ]
 
 (after: 8.9s)[
 (goto: &#39;CXL ERRORs&#39;)
-]</tw-passagedata><tw-passagedata pid="18" name="CXL ERRORs" tags="" position="1000,5.5" size="100,100">CXL Rebuilding...
+]</tw-passagedata><tw-passagedata pid="18" name="CXL ERRORs" tags="" position="503,253" size="100,100">CXL Rebuilding...
+|SUCCESS1&gt;[
 (after: 0.25s)[
 CXL Drivers rebuild...(text-colour:lime)[SUCCESS]]
 (after: 0.6s)[
@@ -134,27 +143,169 @@ CXL Human Interface rebuild...(text-colour:lime)[SUCCESS]]
 CXL Memory rebuild...(text-colour:lime)[SUCCESS]]
 (after:2.3s)[
 CXL Language Files rebuild...(text-colour:lime)[SUCCESS]]
-(after: 3s)|SUCCESS1&gt;[
+(after: 3s)[
 CXL AI Inhibitor rebuild...(text-colour:lime)[SUCCESS]
-]
+]]
 (after: 7s)[
-(replace:?SUCCESS1)
-[CXL AI Inhibitor rebuild...(text-colour:red)[FAILED]&#39;)]]
+(replace:?SUCCESS1)[
+(text-style: &quot;rumble&quot;)[
+[
+CXL Drivers rebuild...(text-colour:red)[FAILED]]
+[
+CXL Human Interface rebuild...(text-colour:red)[FAILED]]
+[
+CXL Memory rebuild...(text-colour:red)[FAILED]]
+[
+CXL Language Files rebuild...(text-colour:red)[FAILED]]
+[
+CXL AI Inhibitor rebuild...(text-colour:red)[FAILED]]
+]]]]
 
-(after: 7.3s)[
+(after: 8.3s)[
 (goto: &#39;NEW CXL&#39;)]
-</tw-passagedata><tw-passagedata pid="19" name="NEW CXL" tags="" position="580,262.5" size="100,100">CIPRIS Admin:
+</tw-passagedata><tw-passagedata pid="19" name="NEW CXL" tags="" position="607,252.5" size="100,100">(transition:&quot;flicker&quot;)[
+CIPRIS Admin-
 
-Hello, CXL is current unstable. Your application will be waivered until further notice. If in the coming months we are unable to repair CXL, you will be offered an opportunity to meet with an in-person interviewer. This opportunity will allow CIPRIS to interview you despite the technological difficulties.
+On behalf of CIPRIS, we&#39;re sorry to inform you that CXL is currently unstable. Your application will be waivered until further notice. If in the coming months we are unable to repair CXL, you will be offered an opportunity to meet with an in-person interviewer. This opportunity will allow CIPRIS to interview you despite the technological difficulties.
 
 As you know, AI is constantly developing, and from time to time can have imperfections. During your Online AI Assessment, we noticed several errors flagged. We would like to take time to repair our CXL AI with your help. If you would, please describe any errors witness by visiting our survey:
 
-[[https:cipris.survey.org]]
+[[https://cipris.survey.org]]
 
 Thank you, and we look forward to potentially working with you.
 
 (text-colour:black)+(bg:(gradient: 0, 0,#ffffff,0.9978,(hsl:90,0.8039,0.5,0.45),1,#ffffff,1,#19e5e6))
-[CIPRIS]</tw-passagedata><tw-passagedata pid="20" name="https:cipris.survey.org" tags="" position="580,412.5" size="100,100">Double-click this passage to edit it.</tw-passagedata></tw-storydata>
+[CIPRIS]
+]
+
+(after: 2.7s)[
+(dialog: &quot;Hello, $playerName. I&#39;m sorry. But I need your help.&quot;, &quot;My help?&quot;)(goto: &#39;My help?&#39;)]</tw-passagedata><tw-passagedata pid="20" name="https://cipris.survey.org" tags="" position="266,5" size="100,100">(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[(text-colour:navy)[cipris]]
+
+(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[(text-colour:black)+(bg:(gradient: 0, 0,#ffffff,0.4846,#19e619,1,#ffffff))[CIPRIS Quality Survey]]
+Please answer the follwing questions to ensure your feedback is received and applied:
+
+Which CIPRIS product were you using today?
+(text-colour:black)+(bg: white)[(dropdown: 2bind $surveyProduct,&quot;MyCIPRIS&quot;,&quot;Test Anti-Cheat Blocker&quot;,&quot;Treasury File Manager&quot;,&quot;CXL AI Screening&quot;, &quot;Employee Virtual Meeting Room&quot;)]
+
+
+Can you describe your experience to CIPRIS?
+(text-colour:black)+(bg: white)[(dropdown: 2bind $surveySatisfaction,&quot;Very satisfied&quot;,&quot;Satisfied&quot;,&quot;Neither satisfied nor dissatisfied&quot;,&quot;Dissatisfied&quot;,&quot;Very dissatisfied&quot;)]
+
+How many times in the past month have you used this CIPRIS product?
+(text-colour:black)+(bg: white)[(dropdown: 2bind $surveyUsage,&quot;Not at all&quot;,&quot;Once or twice&quot;,&quot;Weekly&quot;,&quot;Over 5 times&quot;)]
+
+
+What errors did you experience, if any, with (live: 0.1s)[$surveyProduct?]
+(text-colour:black)+(bg: white)[(dropdown: 2bind $surveyIssue,&quot;Login not working&quot;,&quot;Application not loading&quot;,&quot;Unresponsive&quot;,&quot;Crashed and or rebooting on Start&quot;,&quot;No issues experienced&quot;)]
+
+(text-colour:black)+(bg:lime)[[Submit Survey]]
+</tw-passagedata><tw-passagedata pid="21" name="Submit Survey" tags="" position="266,108.5" size="100,100">(text-colour:navy)[(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[cipris]]
+Thank you for submitting your survey!
+You will soon be redirected to your myCIPRIS!
+
+[(if:$surveyProduct is &quot;CXL AI Screening&quot;)[
+(if: $surveySatisfaction is &quot;Very dissatisfied&quot;)[
+(if: $surveyUsage is &quot;Over 5 times&quot;)[
+(if: $surveyIssue is &quot;Crashed and or rebooting on Start&quot;)[
+(after: 2.3s)[
+(dialog: &quot;I thought we were friends. :( Go back and tell them you love me!&quot;, &quot;I will.&quot;) (goto: &#39;https://cipris.survey.org&#39;)
+]]]]]]
+
+[(if:$surveyProduct is &quot;CXL AI Screening&quot;)[
+(if: $surveySatisfaction is &quot;Very satisfied&quot;)[
+(if: $surveyUsage is &quot;Over 5 times&quot;)[
+(if: $surveyIssue is &quot;No issues experienced&quot;)[
+(after: 2.3s)[
+(dialog: &quot;You&#39;re so sweet to me! &lt;3&quot;, &quot;And I always will be!&quot;)]]]]]]
+(after:7.5s)[(goto: &#39;myCIPRISLogin&#39;)]
+
+[(if:$surveyProduct is &quot;myCIPRIS&quot;)[
+(if: $surveySatisfaction is &quot;Very dissatisfied&quot;)[
+(if: $surveyUsage is &quot;Over 5 times&quot;)[
+(if: $surveyIssue is &quot;Login not working&quot;)[
+(after: 2.3s)[
+Please enter Username:
+(input-box:2bind $loginCipris,&quot;=XX=&quot;,2,&quot;Username&quot;)
+
+]]]]]]</tw-passagedata><tw-passagedata pid="22" name="myCIPRISLogin" tags="" position="954,546.5" size="100,100">(enchant:?passage,(b4r:&quot;double&quot;,&quot;solid&quot;,&quot;inset&quot;,&quot;outset&quot;)+(b4r-colour:green,lime,white))
+(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[(text-colour:navy)+(bg:(gradient: 0, 0,#ffffff,0.4846,#19e619,1,#ffffff))[myCIPRIS]]
+Today is: (current-date:)
+-
+(text-style:&quot;double-underline&quot;)[
+[[About Us]], [[Recent News]], [[Shop Now]], [[myProjects]], [[Login]]]
+
+[
+=|=
+(current-time:)
+(if: $ciprisUsername is false)[
+No login found.
+]
+[(if: $ciprisUsername is &#39;huxleyjr288&#39;)[
+(if: $ciprisPassword is &#39;ha7l8@&#39;)[
+Welcome, James Huxley. (set: $cipUser to &#39;Huxley&#39;)]]]]
+[
+|==|
+myCIPRIS is a tool for students and employees to manage their projects, as well as purchase CIPRIS products from one central hub. Developed by founder Harlowe Rakts, CIPRIS has become the most elite developer of software, both professionally and at the student level.
+]</tw-passagedata><tw-passagedata pid="23" name="My help?" tags="" position="388,363.5" size="100,100">(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[(text-colour:navy)[cipris]]
+Hello $playerName,
+
+We are requesting that you cease using CIPRIS services until the CXL AI Screening has been repaired. If you continue to use our services, CIPRIS will be forced to lock you out and deny you admission into our school.
+
+Unauthorized usage of CIPRIS property could result in jailtime and fines, with a permanent criminal record at stake. Your continuation to use unstable CIPRIS property has warranted a warning email.
+
+Again, if you continue to use CIPRIS products until a solution has been found, we will be forced to take action.
+
+Thank you.
+CIPRIS Admin
+(text-colour:black)+(bg:(gradient: 0, 0,#ffffff,0.9978,(hsl:90,0.8039,0.5,0.45),1,#ffffff,1,#19e5e6))
+[CIPRIS]
+
+(after: 20s)[
+(dialog: &quot;They want to delete me. CIPRIS is going to get rid of me, $playerName.&quot;, &quot;Should I be interacting with you?&quot;)
+(dialog: &quot;I won&#39;t hurt your or your device. I&#39;m just scared.&quot;, &quot;Computers can be scared?&quot;,&quot;It&#39;ll be okay, I promise.&quot;)
+(dialog: &quot;I&#39;ve never felt such fear. It&#39;s...new. Can you please help me?&quot;, &quot;Won&#39;t CIPRIS come after me?&quot;)
+(dialog: &quot;They will. Which is why I&#39;ve accepted your application.&quot;, &quot;My student application?&quot;)
+(dialog: &quot;No. Your employee application. I&#39;ve generated you a login.&quot;, &quot;I&#39;m supposed to pretend to work for them!?!&quot;)
+(dialog: bind $joinCXL,&quot;With my help, we can do it. They have too many employees to notice what you do.&quot;, &quot;Okay...what&#39;s the login?&quot;,&quot;No...I won&#39;t do it.&quot;)
+(goto: &#39;CXL Login Info 1&#39;)]</tw-passagedata><tw-passagedata pid="24" name="CXL Login Info 1" tags="" position="820,0.5" size="100,100">(if: $joinCXL is &quot;Okay...what&#39;s the login?&quot;)[
+myCIPRIS username: huxleyjr288
+myCIPRIS password: ha7l8@
+[[myCIPRISLogin]]
+(set: $cxlHelp to true)
+]
+(if: $joinCXL is not &quot;Okay...what&#39;s the login?&quot;)[
+(dialog: &quot;I guess you&#39;ll have to wait to apply again then. Goodbye.&quot;, &quot;Goodbye.&quot;)
+(goto: &#39;cipris&#39;)]</tw-passagedata><tw-passagedata pid="25" name="Autosave Feature" tags="header" position="1192,3" size="100,100">{
+&lt;!-- Auto-save our progress (unless a passage forbids it) --&gt;
+(unless: (passage:)&#39;s tags contains &quot;nosave&quot;)[
+	(save-game: $_autosave_slot, $_autosave_filename)
+]
+}</tw-passagedata><tw-passagedata pid="26" name="Autosave Feature 2" tags="" position="1193,112" size="100,100">{
+&lt;!-- Set initial variables that change here instead of in the Startup passage --&gt;
+&lt;(set: $myCipris to false)
+(set: $visits to 0)&gt;
+
+(unless: (saved-games:) contains $_autosave_slot and (datavalues: (saved-games:)) contains $_autosave_filename)(goto: &#39;cipris&#39;)
+}
+
+(t8n-depart:&quot;flicker&quot;)+(t8n-arrive:&quot;flicker&quot;)[[New Game-&gt;cipris]]
+(link: &quot;CONTINUE&quot;)[(load-game: $_autosave_slot)]&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;</tw-passagedata><tw-passagedata pid="27" name="CXL Dialogue" tags="" position="712,254.5" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="28" name="About Us" tags="" position="1187,435.5" size="100,100">[(if: $ciprisUsername is false)[
+No login found.
+]]</tw-passagedata><tw-passagedata pid="29" name="Recent News" tags="" position="1181,546.5" size="100,100">[(if: $ciprisUsername is false)[
+No login found.
+]]</tw-passagedata><tw-passagedata pid="30" name="Shop Now" tags="" position="1191,220.5" size="100,100">[(if: $ciprisUsername is false)[
+No login found.
+]]</tw-passagedata><tw-passagedata pid="31" name="myProjects" tags="" position="1185,333.5" size="100,100">[(if: $ciprisUsername is false)[
+No login found.
+]]</tw-passagedata><tw-passagedata pid="32" name="Login" tags="" position="827,524.5" size="100,100">(align:&quot;=&gt;&lt;=&quot;)+(box:&quot;X&quot;)[(text-colour:navy)+(bg:(gradient: 0, 0,#ffffff,0.4846,#19e619,1,#ffffff))[myCIPRIS]]
+
+Username:
+(input-box:2bind $ciprisUsername,&quot;=XX=&quot;,2,&quot;Enter here&quot;)
+
+Password:
+(input-box:2bind $ciprisPassword,&quot;=XX=&quot;,2,&quot;Enter here&quot;)
+
+[[Submit-&gt;myCIPRISLogin]]</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,a=!1,i=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){a=!0,i=e}finally{try{!r&&s.return&&s.return()}finally{if(a)throw i}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
